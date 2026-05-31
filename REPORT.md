@@ -9,12 +9,10 @@
 
 | Service           | URL                                                              |
 |-------------------|------------------------------------------------------------------|
-| 🌐 Live Frontend  | `https://accelalpha-conference.vercel.app` *(update after deploy)* |
-| ⚙️ Backend API    | `https://accelalpha-backend.onrender.com` *(update after deploy)*  |
-| 📋 API Docs       | `https://accelalpha-backend.onrender.com/docs`                   |
-| 💚 Health Check   | `https://accelalpha-backend.onrender.com/api/health`             |
-
-> Replace placeholder URLs with your actual deployed URLs before emailing submission.
+| 🌐 Live Frontend  | https://ai-event-invitation-platform.vercel.app |
+| ⚙️ Backend API    | https://ai-event-invitation-platform.onrender.com |
+| 📋 API Docs       | https://ai-event-invitation-platform.onrender.com/docs |
+| 💚 Health Check   | https://ai-event-invitation-platform.onrender.com/api/health |
 
 ---
 
@@ -28,8 +26,8 @@
 ### Clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/accelalpha-conference-platform.git
-cd accelalpha-conference-platform
+git clone https://github.com/Achini248/ai-event-invitation-platform.git
+cd ai-event-invitation-platform
 ```
 
 ### Backend
@@ -67,7 +65,7 @@ pytest tests/ -v
 
 ## 3. Content Creation Check (LinkedIn Post)
 
-> 🚀 What if your conference invitation was written by AI — tailored to your exact career challenges? We built an interactive event platform for the ACCELALPHA × ORACLE 2024 Supply Chain Summit that reads your professional focus, matches you to the right session, and delivers a personalised B2B invitation in seconds. Corporate event planners: this is what modern attendee personalisation at scale actually looks like. See it live → [link] #SupplyChain #AI #EventTech #Oracle
+> 🚀 What if your conference invitation was written by AI — tailored to your exact career challenges? We built an interactive event platform for the ACCELALPHA × ORACLE 2024 Supply Chain Summit that reads your professional focus, matches you to the right session, and delivers a personalised B2B invitation in seconds. Corporate event planners: this is what modern attendee personalisation at scale actually looks like. See it live → https://ai-event-invitation-platform.vercel.app #SupplyChain #AI #EventTech #Oracle
 
 ---
 
