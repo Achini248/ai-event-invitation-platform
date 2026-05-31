@@ -7,6 +7,7 @@ from app.prompts.system_prompt import SYSTEM_PROMPT
 from app.prompts.invitation_prompt import build_invitation_prompt
 from app.utils.text_cleaner import extract_subject_and_body
 from app.utils.logger import get_logger
+import asyncio
 
 logger = get_logger(__name__)
 
@@ -21,9 +22,7 @@ def generate_invitation(visitor: VisitorRequest, session: Session) -> tuple[str,
 
     # 🔴 API KEY CHECK
     if not settings.gemini_api_key:
-        raise ValueError(
-            "GEMINI_API_KEY is not set. Add it to your .env file or environment variables."
-        )
+        raise ValueError("GEMINI_API_KEY is not set")
 
     client = genai.Client(api_key=settings.gemini_api_key)
     prompt = build_invitation_prompt(visitor, session)
@@ -31,15 +30,21 @@ def generate_invitation(visitor: VisitorRequest, session: Session) -> tuple[str,
     logger.info(f"Calling Gemini for visitor: {visitor.email}")
 
     try:
-        # 🔥 GEMINI CALL
-        response = client.models.generate_content(
-            model="gemini-1.5-pro",
-            config=types.GenerateContentConfig(
-                system_instruction=SYSTEM_PROMPT,
-                max_output_tokens=600,
-                temperature=0.4,
-            ),
-            contents=prompt,
+        # 🚀 FAST + SAFE CALL (NO TIMEOUT FREEZE)
+        response = asyncio.run(
+            asyncio.wait_for(
+                asyncio.to_thread(
+                    client.models.generate_content,
+                    model="gemini-1.5-flash",
+                    config=types.GenerateContentConfig(
+                        system_instruction=SYSTEM_PROMPT,
+                        max_output_tokens=300,
+                        temperature=0.4,
+                    ),
+                    contents=prompt,
+                ),
+                timeout=25  # ⛔ hard stop
+            )
         )
 
         raw_text = response.text.strip()
@@ -47,15 +52,15 @@ def generate_invitation(visitor: VisitorRequest, session: Session) -> tuple[str,
         subject, body = extract_subject_and_body(raw_text)
 
         if not subject:
-            subject = f"Your Invitation to {session.title}"
+            subject = f"Invitation to {session.title}"
 
         logger.info(f"Email generated successfully for {visitor.email}")
         return subject, body
 
     except Exception as e:
-        logger.error(f"Gemini API error: {e}")
+        logger.error(f"Gemini failed or timeout: {e}")
 
-        # 🔥 SAFE FALLBACK (NO CRASH)
+        # 🔥 FALLBACK (ALWAYS RETURNS RESPONSE)
         subject = f"Invitation to {session.title}"
 
         body = f"""
