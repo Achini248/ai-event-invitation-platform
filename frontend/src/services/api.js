@@ -1,14 +1,18 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
+const BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  'https://ai-event-invitation-platform.onrender.com';
 
 const api = axios.create({
   baseURL: BASE_URL,
-  timeout: 90_000,
-  headers: { 'Content-Type': 'application/json' },
+  timeout: 120000, // ⛔ increased timeout (important for Gemini)
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-// Response interceptor — normalise errors
+// 🔥 Response interceptor (clean error messages)
 api.interceptors.response.use(
   (res) => res,
   (err) => {
@@ -19,6 +23,7 @@ api.interceptors.response.use(
         : null) ||
       err?.message ||
       'An unexpected error occurred.';
+
     return Promise.reject(new Error(detail));
   }
 );
