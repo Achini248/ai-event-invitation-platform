@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     environment: str = "development"
     log_level: str = "INFO"
-    allowed_origins: str = "http://localhost:5173,https://ai-event-invitation-platform.vercel.app/"
+    allowed_origins: str = "http://localhost:5173,https://ai-event-invitation-platform.vercel.app"
 
     # Derived paths
     @property
