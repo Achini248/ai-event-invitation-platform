@@ -33,7 +33,7 @@ def generate_invitation(visitor: VisitorRequest, session: Session) -> tuple[str,
     try:
         # 🔥 GEMINI CALL
         response = client.models.generate_content(
-            model="gemini-1.5-flash",
+            model="gemini-1.5-pro",
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
                 max_output_tokens=600,
