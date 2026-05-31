@@ -1,15 +1,15 @@
-from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.config.settings import get_settings
+from fastapi import FastAPI
 
 
 def configure_cors(app: FastAPI) -> None:
-    """Attach CORS middleware with settings-driven origins."""
-    settings = get_settings()
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=settings.origins_list,
+        allow_origins=[
+            "http://localhost:5173",
+            "https://ai-event-invitation-platform.vercel.app"
+        ],
         allow_credentials=True,
-        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_methods=["*"],
         allow_headers=["*"],
     )
