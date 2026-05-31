@@ -1,0 +1,44 @@
+/* Reusable CSS-only animation utilities */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-16px); }
+}
+
+@keyframes blobDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.05); }
+  66%       { transform: translate(-20px, 10px) scale(0.97); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes bounceDot {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-float      { animation: float 7s ease-in-out infinite; }
+.animate-blob       { animation: blobDrift 12s ease-in-out infinite; }
+.animate-rotate-ring{ animation: rotateRing 2s linear infinite; }
+
+.shimmer-text {
+  background: linear-gradient(90deg, #00d4ff 25%, #ffffff 50%, #7c3aed 75%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+.dot-1 { animation: bounceDot 0.9s ease-in-out infinite 0s; }
+.dot-2 { animation: bounceDot 0.9s ease-in-out infinite 0.15s; }
+.dot-3 { animation: bounceDot 0.9s ease-in-out infinite 0.30s; }
